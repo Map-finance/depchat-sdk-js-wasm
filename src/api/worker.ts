@@ -153,10 +153,12 @@ import {
   batchInsertTempCacheMessageList,
   InsertTempCacheMessage,
   getAllSingleConversationIDList,
+  findAllUnreadConversationConversationID,
   getAllConversationIDList,
   getPageFriendList,
   getGroupMemberAllGroupIDs,
   getAlreadyExistSeqList,
+  getLatestValidServerMessage,
   markConversationAllMessageAsRead,
   searchAllMessageByContentType,
   deleteConversationMsgs,
@@ -248,6 +250,7 @@ rpc.registerMethod(
   updateMsgSenderFaceURLAndSenderNickname
 );
 rpc.registerMethod('getAlreadyExistSeqList', getAlreadyExistSeqList);
+rpc.registerMethod('getLatestValidServerMessage', getLatestValidServerMessage);
 rpc.registerMethod('getMessageBySeq', getMessageBySeq);
 rpc.registerMethod('getMessagesByClientMsgIDs', getMessagesByClientMsgIDs);
 rpc.registerMethod('getMessagesBySeqs', getMessagesBySeqs);
@@ -318,6 +321,10 @@ rpc.registerMethod('incrConversationUnreadCount', incrConversationUnreadCount);
 rpc.registerMethod(
   'setMultipleConversationRecvMsgOpt',
   setMultipleConversationRecvMsgOpt
+);
+rpc.registerMethod(
+  'findAllUnreadConversationConversationID',
+  findAllUnreadConversationConversationID
 );
 rpc.registerMethod(
   'getAllSingleConversationIDList',

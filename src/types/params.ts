@@ -19,6 +19,7 @@ import {
   LogLevel,
   GroupMessageReaderFilter,
   GroupAtType,
+  ViewType,
 } from './enum';
 
 export type WasmPathConfig = {
@@ -44,12 +45,16 @@ export type GetOneConversationParams = {
   sessionType: number;
 };
 export type GetAdvancedHistoryMsgParams = {
-  userID?: string;
-  groupID?: string;
-  lastMinSeq: number;
   count: number;
+  viewType: ViewType;
   startClientMsgID: string;
   conversationID: string;
+};
+export type FetchSurroundingParams = {
+  startMessage: MessageItem;
+  viewType: ViewType;
+  before: number;
+  after: number;
 };
 export type GetHistoryMsgParams = {
   userID: string;
@@ -307,8 +312,8 @@ export type GetSpecifiedFriendsParams = {
 export type UpdateFriendsParams = {
   friendUserIDs: string[];
   isPinned?: boolean;
-  remark?: boolean;
-  ex?: boolean;
+  remark?: string;
+  ex?: string;
 };
 export type RemarkFriendParams = {
   toUserID: string;

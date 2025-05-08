@@ -75,15 +75,32 @@ export function getMessageList(
   conversationID: string,
   count: number,
   startTime: number,
+  startSeq: number,
+  startClientMsgID: string,
   isReverse: boolean
 ): QueryExecResult[] {
   return db.exec(
+    // `
+    // SELECT * FROM 'chat_logs_${conversationID}' WHERE send_time ${
+    //   !isReverse ? '<' : '>'
+    // } ${startTime} ORDER BY send_time ${
+    //   !isReverse ? 'DESC' : 'ASC'
+    // } LIMIT ${count}
+    // `
     `
-    SELECT * FROM 'chat_logs_${conversationID}' WHERE send_time ${
-      !isReverse ? '<' : '>'
-    } ${startTime} ORDER BY send_time ${
-      !isReverse ? 'DESC' : 'ASC'
-    } LIMIT ${count}
+    SELECT * FROM 'chat_logs_${conversationID}'
+    WHERE
+      send_time ${!isReverse ? '<' : '>'} ${startTime}
+      OR (
+        send_time = ${startTime} AND (
+          seq ${!isReverse ? '<' : '>'} ${startSeq}
+          OR (seq = 0 AND client_msg_id != '${startClientMsgID}')
+        )
+      )
+    ORDER BY
+      send_time ${!isReverse ? 'DESC' : 'ASC'},
+      seq ${!isReverse ? 'DESC' : 'ASC'}
+    LIMIT ${count}
     `
   );
 }
@@ -583,6 +600,25 @@ export function getLatestActiveMessage(
   return db.exec(
     `
       SELECT * FROM 'chat_logs_${conversationID}' WHERE status < 4 ORDER BY send_time ${order};
+    `
+  );
+}
+
+export function getLatestValidServerMessage(
+  db: Database,
+  conversationID: string,
+  startTime: number,
+  isReverse: boolean
+): QueryExecResult[] {
+  _initLocalChatLogsTable(db, conversationID);
+  const order = isReverse ? 'ASC' : 'DESC';
+  return db.exec(
+    `
+      SELECT * FROM 'chat_logs_${conversationID}' WHERE send_time ${
+      isReverse ? '<' : '>'
+    } ${startTime} AND seq != 0 ORDER BY send_time ${
+      isReverse ? 'DESC' : 'ASC'
+    } LIMIT 1
     `
   );
 }

@@ -56,6 +56,7 @@ declare global {
     updateGroupMessageHasRead: DatabaseApi;
     updateMessageStatusBySourceID: DatabaseApi;
     getAlreadyExistSeqList: DatabaseApi;
+    getLatestValidServerMessage: DatabaseApi;
     getMessageBySeq: DatabaseApi;
     getMessagesByClientMsgIDs: DatabaseApi;
     getMessagesBySeqs: DatabaseApi;
@@ -103,6 +104,7 @@ declare global {
     setMultipleConversationRecvMsgOpt: DatabaseApi;
     unPinConversation: DatabaseApi;
     getAllSingleConversationIDList: DatabaseApi;
+    findAllUnreadConversationConversationID: DatabaseApi;
     getAllConversationIDList: DatabaseApi;
     getAllConversations: DatabaseApi;
     searchConversations: DatabaseApi;
@@ -265,6 +267,10 @@ declare global {
     getAdvancedHistoryMessageListReverse: (
       operationID: string,
       getAdvancedHistoryMessageListReverseParamsStr: string
+    ) => Promise<string>;
+    fetchSurroundingMessages: (
+      operationID: string,
+      fetchSurroundingMessagesParamsStr: string
     ) => Promise<string>;
     getHistoryMessageList: (
       operationID: string,

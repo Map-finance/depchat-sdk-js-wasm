@@ -3,6 +3,7 @@ import {
   ClientMessage,
   getMessage as databaseGetMessage,
   getAlreadyExistSeqList as databaseGetAlreadyExistSeqList,
+  getLatestValidServerMessage as databaseGetLatestValidServerMessage,
   getMessageBySeq as databaseGetMessageBySeq,
   getMessagesByClientMsgIDs as databaseGetMessagesByClientMsgIDs,
   getMessagesBySeqs as databaseGetMessagesBySeqs,
@@ -107,12 +108,58 @@ export async function getAlreadyExistSeqList(
   }
 }
 
+export async function getLatestValidServerMessage(
+  conversationID: string,
+  startTime: number,
+  isReverse: boolean
+): Promise<string> {
+  try {
+    const db = await getInstance();
+
+    const execResult = databaseGetLatestValidServerMessage(
+      db,
+      conversationID,
+      startTime,
+      isReverse
+    );
+
+    const message = converSqlExecResult(execResult[0], 'CamelCase', [
+      'isRead',
+      'isReact',
+      'isExternalExtensions',
+    ])[0];
+
+    if (!message) {
+      return formatResponse(
+        '',
+        DatabaseErrorCode.ErrorNoRecord,
+        `no message with conversationID ${conversationID}`
+      );
+    }
+
+    return formatResponse(message);
+  } catch (e) {
+    console.error(e);
+
+    return formatResponse(
+      undefined,
+      DatabaseErrorCode.ErrorInit,
+      JSON.stringify(e)
+    );
+  }
+}
+
 export async function getMessageList(
   conversationID: string,
   count: number,
   startTime: number,
+  startSeq: number,
+  startClientMsgID: string,
   isReverse = false
 ): Promise<string> {
+  if (startTime <= 0) {
+    return getMessageListNoTime(conversationID, count, isReverse);
+  }
   try {
     const db = await getInstance();
 
@@ -121,6 +168,8 @@ export async function getMessageList(
       conversationID,
       count,
       startTime,
+      startSeq,
+      startClientMsgID,
       isReverse
     );
 
