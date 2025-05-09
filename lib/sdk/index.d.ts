@@ -86,6 +86,7 @@ declare class SDK extends Emitter {
     deleteAllMsgFromLocal: <T>(operationID?: string) => Promise<WsResponse<T>>;
     deleteAllMsgFromLocalAndSvr: <T>(operationID?: string) => Promise<WsResponse<T>>;
     insertSingleMessageToLocalStorage: <T>(data: InsertSingleMsgParams, operationID?: string) => Promise<WsResponse<T>>;
+    batchInsertMessageToLocalStorage: <T>(data: InsertSingleMsgParams, operationID?: string) => Promise<WsResponse<T>>;
     insertGroupMessageToLocalStorage: <T>(data: InsertGroupMsgParams, operationID?: string) => Promise<WsResponse<T>>;
     /**
      * @deprecated Use changeInputStates instead.
