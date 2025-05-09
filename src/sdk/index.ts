@@ -919,6 +919,16 @@ class SDK extends Emitter {
       [operationID, JSON.stringify(data.message), data.recvID, data.sendID]
     );
   };
+  batchInsertMessagesToLocalStorage = <T>(
+    data: InsertSingleMsgParams,
+    operationID = uuidv4()
+  ) => {
+    return this._invoker<T>(
+      'batchInsertMessagesToLocalStorage ',
+      window.batchInsertMessagesToLocalStorage,
+      [operationID, JSON.stringify(data.message)]
+    );
+  };
 
   insertGroupMessageToLocalStorage = <T>(
     data: InsertGroupMsgParams,

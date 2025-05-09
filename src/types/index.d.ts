@@ -514,6 +514,10 @@ declare global {
       recvID: string,
       sendID: string
     ) => Promise<string>;
+    batchInsertMessagesToLocalStorage: (
+      operationID: string,
+      message: string,
+    ) => Promise<string>;
     insertGroupMessageToLocalStorage: (
       operationID: string,
       message: string,
