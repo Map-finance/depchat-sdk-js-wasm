@@ -2,6 +2,7 @@ import Emitter from '../utils/emitter';
 import { AccessFriendApplicationParams, AccessGroupApplicationParams, AccessMessageParams, AddFriendParams, AdvancedMsgParams, AdvancedQuoteMsgParams, AtMsgParams, ChangeGroupMemberMuteParams, ChangeGroupMuteParams, CreateGroupParams, CustomMsgParams, CustomSignalParams, FaceMessageParams, FileMsgParamsByURL, FindMessageParams, GetAdvancedHistoryMsgParams, GetGroupMemberByTimeParams, GetGroupMemberParams, GetGroupMessageReaderParams, GetHistoryMsgParams, GetOneConversationParams, ImageMsgParamsByURL, InitAndLoginConfig, InsertGroupMsgParams, InsertSingleMsgParams, AccessToGroupParams, SetConversationRecvOptParams, JoinGroupParams, LocationMsgParams, UpdateMemberInfoParams, MergerMsgParams, PartialUserItem, SetConversationPinParams, QuoteMsgParams, RemarkFriendParams, RtcActionParams, SearchFriendParams, SearchGroupMemberParams, SearchGroupParams, SearchLocalParams, SendGroupReadReceiptParams, SendMsgParams, SetBurnDurationParams, SetConversationMsgDestructParams, SetConversationMsgDestructTimeParams, SetConversationDraftParams, SetGroupRoleParams, SetGroupVerificationParams, SetMemberPermissionParams, SetMessageLocalExParams, SetConversationPrivateStateParams, SignalingInviteParams, SoundMsgParamsByURL, SplitConversationParams, TransferGroupParams, TypingUpdateParams, UploadFileParams, VideoMsgParamsByURL, SetGroupMemberNickParams, WasmPathConfig, PinFriendParams, SetFriendExParams, SetConversationExParams, AddBlackParams, OffsetParams, UpdateFriendsParams, SetConversationParams, GetSpecifiedFriendsParams, ChangeInputStatesParams, GetInputstatesParams, FetchSurroundingParams } from '../types/params';
 import { AdvancedGetMessageResult, BlackUserItem, CallingRoomData, CardElem, ConversationItem, FriendApplicationItem, FriendshipInfo, FriendUserItem, GroupApplicationItem, GroupItem, GroupMemberItem, MessageItem, OfflinePush, PublicUserItem, RtcInvite, RtcInviteResults, SearchedFriendsInfo, SearchMessageResult, SelfUserInfo, UserOnlineState, WsResponse } from '../types/entity';
 import { LoginStatus, MessageReceiveOptType, Platform } from '../types/enum';
+import { BatchInsertSingleMsgParams } from '../../src';
 declare class SDK extends Emitter {
     private wasmInitializedPromise;
     private goExitPromise;
@@ -87,7 +88,7 @@ declare class SDK extends Emitter {
     deleteAllMsgFromLocalAndSvr: <T>(operationID?: string) => Promise<WsResponse<T>>;
     insertSingleMessageToLocalStorage: <T>(data: InsertSingleMsgParams, operationID?: string) => Promise<WsResponse<T>>;
     batchInsertMessageToLocalStorage: <T>(data: InsertSingleMsgParams, operationID?: string) => Promise<WsResponse<T>>;
-    batchInsertMessagesToLocalStorage: <T>(data: InsertSingleMsgParams, operationID?: string) => Promise<WsResponse<T>>;
+    batchInsertMessagesToLocalStorage: <T>(data: BatchInsertSingleMsgParams, operationID?: string) => Promise<WsResponse<T>>;
     insertGroupMessageToLocalStorage: <T>(data: InsertGroupMsgParams, operationID?: string) => Promise<WsResponse<T>>;
     /**
      * @deprecated Use changeInputStates instead.

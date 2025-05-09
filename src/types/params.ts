@@ -255,6 +255,9 @@ export type InsertSingleMsgParams = {
   recvID: string;
   sendID: string;
 };
+export type BatchInsertSingleMsgParams = {
+  message: MessageItem;
+};
 export type InsertGroupMsgParams = {
   message: MessageItem;
   groupID: string;

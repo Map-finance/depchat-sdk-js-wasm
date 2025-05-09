@@ -74,7 +74,7 @@ import {
   GetSpecifiedFriendsParams,
   ChangeInputStatesParams,
   GetInputstatesParams,
-  FetchSurroundingParams,
+  FetchSurroundingParams, BatchInsertSingleMsgParams,
 } from '../types/params';
 
 import {
@@ -920,7 +920,7 @@ class SDK extends Emitter {
     );
   };
   batchInsertMessagesToLocalStorage = <T>(
-    data: InsertSingleMsgParams,
+    data: BatchInsertSingleMsgParams,
     operationID = uuidv4()
   ) => {
     return this._invoker<T>(
