@@ -193,6 +193,11 @@ import {
   getNotificationAllSeqs,
   batchInsertNotificationSeq,
   getExistedTables,
+
+  // user key
+  getUserKey,
+  insertUserKey,
+  updateUserKey,
 } from '../api/database';
 
 import { getInstance } from './database/instance';
@@ -479,6 +484,11 @@ rpc.registerMethod('batchInsertNotificationSeq', batchInsertNotificationSeq);
 rpc.registerMethod('setNotificationSeq', setNotificationSeq);
 
 rpc.registerMethod('getExistedTables', getExistedTables);
+
+// user key
+rpc.registerMethod('getUserKey', getUserKey);
+rpc.registerMethod('insertUserKey', insertUserKey);
+rpc.registerMethod('updateUserKey', updateUserKey);
 
 rpc.registerMethod('exec', async (sql: string) => {
   const db = await getInstance();

@@ -248,6 +248,11 @@ declare global {
     // table master
     getExistedTables: DatabaseApi;
 
+    // user key
+    getUserKey: DatabaseApi;
+    insertUserKey: DatabaseApi;
+    updateUserKey: DatabaseApi;
+
     // registered by go wasm
     initSDK: (operationID: string, config: string) => void;
     login: (operationID: string, userID: string, token: string) => Promise<any>;
@@ -516,7 +521,7 @@ declare global {
     ) => Promise<string>;
     batchInsertMessagesToLocalStorage: (
       operationID: string,
-      message: string,
+      message: string
     ) => Promise<string>;
     insertGroupMessageToLocalStorage: (
       operationID: string,

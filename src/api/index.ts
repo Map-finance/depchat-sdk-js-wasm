@@ -639,7 +639,13 @@ export function initDatabaseAPI(isLogStandardOutput = true): void {
     'batchInsertNotificationSeq'
   );
 
+  // table master
   window.getExistedTables = registeMethodOnWindow('getExistedTables');
+
+  // user key functions
+  window.getUserKey = registeMethodOnWindow('getUserKey');
+  window.insertUserKey = registeMethodOnWindow('insertUserKey');
+  window.updateUserKey = registeMethodOnWindow('updateUserKey');
 }
 
 export const workerPromise = rpc?.connect(5000);
