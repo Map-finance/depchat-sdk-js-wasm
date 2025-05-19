@@ -1610,6 +1610,18 @@ class SDK extends Emitter {
       }),
     ]);
   };
+  encodeFile = (data: UploadFileParams, operationID = uuidv4()) => {
+    data.uuid = `${data.uuid}/${data.file?.name}`;
+    window.fileMapSet(data.uuid, data.file);
+    return this._invoker<{ url: string }>('encodeFile ', window.encodeFile, [
+      operationID,
+      JSON.stringify({
+        ...data,
+        filepath: '',
+        cause: '',
+      }),
+    ]);
+  };
   subscribeUsersStatus = (data: string[], operationID = uuidv4()) => {
     return this._invoker<UserOnlineState[]>(
       'subscribeUsersStatus ',
