@@ -1,7 +1,7 @@
 {
   "name": "@openim/wasm-client-sdk",
   "version": "3.8.3-patch.3",
-  "description": "open im sdk for web",
+  "description": "depchat sdk for web",
   "source": "src/index.ts",
   "main": "lib/index.js",
   "unpkg": "lib/index.umd.js",
@@ -34,21 +34,16 @@
     "url": "git+https://github.com/Map-finance/depchat-sdk-js-wasm.git"
   },
   "license": "MIT",
-  "author": {
-    "name": "blooming",
-    "email": "blooming2477@gmail.com",
-    "url": "https://github.com/Bloomingg"
-  },
   "engines": {
     "node": ">=12.0"
   },
   "keywords": [
-    "openim"
+    "depchat"
   ],
   "bugs": {
-    "url": "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/issues"
+    "url": "https://github.com/Map-finance/depchat-sdk-js-wasm/issues"
   },
-  "homepage": "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm#readme",
+  "homepage": "https://github.com/Map-finance/depchat-sdk-js-wasm#readme",
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
