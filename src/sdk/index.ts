@@ -336,6 +336,20 @@ class SDK extends Emitter {
       [operationID, data]
     );
   };
+  markMessagesAsReadByMsgID = <T>(
+    params: SendGroupReadReceiptParams,
+    operationID = uuidv4()
+  ) => {
+    return this._invoker<T>(
+      'markMessagesAsReadByMsgID',
+      window.markMessagesAsReadByMsgID,
+      [
+        operationID,
+        params.conversationID,
+        JSON.stringify(params.clientMsgIDList),
+      ]
+    );
+  };
   sendGroupMessageReadReceipt = <T>(
     params: SendGroupReadReceiptParams,
     operationID = uuidv4()
