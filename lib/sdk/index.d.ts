@@ -23,6 +23,7 @@ declare class SDK extends Emitter {
     getSpecifiedGroupsInfo: (params: string[], operationID?: string) => Promise<WsResponse<GroupItem[]>>;
     deleteConversationAndDeleteAllMsg: <T>(conversationID: string, operationID?: string) => Promise<WsResponse<T>>;
     markConversationMessageAsRead: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>;
+    markMessagesAsReadByMsgID: <T>(params: SendGroupReadReceiptParams, operationID?: string) => Promise<WsResponse<T>>;
     sendGroupMessageReadReceipt: <T>(params: SendGroupReadReceiptParams, operationID?: string) => Promise<WsResponse<T>>;
     getGroupMessageReaderList: (params: GetGroupMessageReaderParams, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>;
     getGroupMemberList: (params: GetGroupMemberParams, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>;
