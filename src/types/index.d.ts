@@ -296,7 +296,7 @@ declare global {
     markMessagesAsReadByMsgID: (
       operationID: string,
       conversationID: string,
-      msgIDListStr: string
+      msgIDListStr: string[]
     ) => Promise<string>;
     sendGroupMessageReadReceipt: (
       operationID: string,
